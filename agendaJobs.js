@@ -1,5 +1,6 @@
 const Agenda = require('agenda');
 const addWeatherToMongo = require('./weatherModel');
+var fetch = require('node-fetch');
 
 const db_connection_string = process.env.DB_STRING;
 const weather_key = process.env.APP_ID;
@@ -43,9 +44,9 @@ const setJobs = async function(){
   try {
     await agenda.start();
     await agenda.cancel({name: queryStr}, (err,num)=>{console.log(num)});
-    const morningJob = await createAgendaJob('morning').repeatEvery('7:00am', {skipImmediate: true}).save();
-    const dayJob = await createAgendaJob('day').repeatEvery('1:00pm',{skipImmediate: true}).save();
-    const eveningJob = await createAgendaJob('evening').repeatEvery('7:00pm',{skipImmediate: true}).save();
+    const morningJob = await createAgendaJob('morning').repeatAt('7:00am', {skipImmediate: true}).save();
+    const dayJob = await createAgendaJob('day').repeatAt('1:00pm',{skipImmediate: true}).save();
+    const eveningJob = await createAgendaJob('evening').repeatAt('7:00pm',{skipImmediate: true}).save();
   } catch (err) {
     console.log(err);
   }
