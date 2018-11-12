@@ -44,9 +44,13 @@ const setJobs = async function(){
   try {
     await agenda.start();
     await agenda.cancel({name: queryStr}, (err,num)=>{console.log(num)});
-    const morningJob = await createAgendaJob('morning').repeatAt('7:00am', {skipImmediate: true}).save();
-    const dayJob = await createAgendaJob('day').repeatAt('1:00pm',{skipImmediate: true}).save();
-    const eveningJob = await createAgendaJob('evening').repeatAt('7:00pm',{skipImmediate: true}).save();
+    const morningJob = await createAgendaJob('test').repeatAt('8:00', {
+      skipImmediate: true,
+      timezone: 'Europe/Kiev'
+    })
+    await morningJob.save();
+    const dayJob = await createAgendaJob('day').repeatAt('13:00').save();
+    const eveningJob = await createAgendaJob('evening').repeatAt('19:00').save();
   } catch (err) {
     console.log(err);
   }

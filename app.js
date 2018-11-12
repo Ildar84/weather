@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var fetch = require('node-fetch');
 var { MongoClient } = require('mongodb');
 var mongoose = require('mongoose');
 var Agenda = require('agenda');
