@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "agenda": "^2.0.2",
+    "circular-list": "0.0.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^6.1.0",
