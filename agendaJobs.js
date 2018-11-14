@@ -25,7 +25,6 @@ times.forEach((data, index)=>{
   circularList.append(node);
 })
 
-circularList.each(findNextNode)
 function getWeather(job, done){
   try {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=Rovenki,ua&units=metric&APPID=${weather_key}`)
@@ -81,13 +80,14 @@ const setJobs = async function(){
     await agenda.start();
     await agenda.cancel({name: queryStr}, (err,num)=>{
       if(err) console.log('Error canceling ald jobs from DB: ', err)
-      console.log('Old jobs were deleted : ',num, ' counts');
+      else console.log('Old jobs were deleted : ',num);
     });
     await createAgendaJob(circularList.first.data.when)
       .schedule(circularList.first.data.time, {
         skipImmediate: true,
         timezone: 'Europe/Kiev'
       }).save();
+      console.log('Initial job was created')
   } catch (err) {
     console.log('Error while setting initial job: ', err);
   }
